@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winston's Journal</title>
+    <style>
+        /* --- DESIGN SYSTEM --- */
+        :root {
+            --bg-light: #fffcfb;       
+            --pink-accent: #0e0e0e;    
+            --orange-accent: #ffffff;  
+            --text-main: #241422;      
+            --text-muted: #251d24;     
+            --dark-blue: #130f24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Georgia', serif; 
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.8;
+            padding-bottom: 5rem;
+        }
+
+        /* --- TOP LOGO NAVIGATION --- */
+        .top-nav {
+            position: absolute;       
+            top: 2rem;                
+            left: 2rem;               
+            z-index: 100;             
+        }
+
+        .logo {
+            height: 80px;             
+            width: auto;              
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;             
+        }
+
+        /* --- FULL WIDTH DARK BLUE BANNER --- */
+                /* --- FULL WIDTH IMAGE BANNER HEADER --- */
+        .article-header {
+            width: 100%;                  
+            margin: 0 0 4rem 0;               
+            padding: 12rem 2rem 8rem 2rem;     /* Slightly increased padding for visual depth */
+            text-align: center;
+            
+            /* ADD YOUR BACKGROUND IMAGE LINK OR FILENAME HERE */
+            background-image: linear-gradient(rgba(19, 15, 36, 0.65), rgba(19, 15, 36, 0.65)), url('cctv.png');
+            
+            /* Formatting rules to make the background image look perfect */
+            background-size: cover;            /* Forces the photo to stretch and fit edge-to-edge without tearing */
+            background-position: center;       /* Keeps the image perfectly centered */
+            background-repeat: no-repeat;      /* Stops the image from tiling like wallpaper */
+            color: #ffffff;                   
+        }
+
+
+        .article-header .category {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            color: var(--orange-accent);      
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .article-header h1 {
+            color: #ffffff;                   
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-header .meta-byline {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.9rem;
+            color: #a0aec0;                   
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 1rem 0;
+            display: inline-block;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* --- STRICTOR ARTICLE CONTAINER --- */
+        .article-body {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- PICTURE BLOCKS --- */
+       /* --- PICTURE BLOCKS WITH FLOATING SHADOW EFFECT --- */
+                /* --- PICTURE CONTAINERS (Stays completely still) --- */
+        .article-image-container {
+            margin: 4rem 0;
+            position: relative;
+            width: 100%;                    
+        }
+
+        /* --- IMAGES ONLY (This floats and casts the shadow) --- */
+        .article-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            
+            /* 1. Base shadow when sitting flat on the canvas */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            
+            /* 2. Animate the movement smoothly over 0.4 seconds */
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        /* 3. The trigger effect: Floats ONLY the image tag when hovered */
+        .article-image-container img:hover {
+            transform: translateY(-12px); /* Lifts the image upward */
+            box-shadow: 0 25px 50px rgba(19, 15, 36, 0.22); /* Spreads out the dark shadow beneath it */
+        }
+
+        /* --- CAPTIONS (Stays perfectly still beneath the floating photo) --- */
+        .caption {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+
+        .caption {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* --- WORD BLOCKS --- */
+        .article-text-block {
+            margin: 4rem auto;
+            max-width: 700px; 
+        }
+
+        .article-text-block p {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 8rem;
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid #ebdcd7;
+        }
+        
+        footer p {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 600px) {
+            .article-header { padding: 8rem 1.5rem 4rem 1.5rem; }
+            .article-image-container { margin: 2.5rem 0; }
+            .article-text-block { margin: 2.5rem auto; }
+            .article-text-block p { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- UPPER LEFT LOGO NAVIGATION -->
+    <nav class="top-nav">
+        <a href="#">
+            <img src="Lpu logo.png" alt="Logo" class="logo">
+        </a>
+    </nav>
+
+    <!-- Header Banner Block -->
+    <header class="article-header">
+        <div class="category">A story through photographs</div>
+        <h1>1984 IS NOW</h1>
+        <div class="meta-byline">
+            By <strong>Hailey Saromo</strong> &bull; October 2026
+        </div>
+    </header>
+
+    <!-- Main Editorial Content Body -->
+    <article class="article-body">
+
+        <!-- Top Featured Header Image -->
+        <div class="article-image-container">
+            <img src="imageofstreetlight.jpg.jpg" alt="Featured street lighting photography">
+            <p class="caption">Big Brother is watching you.</p>
+        </div>
+
+        <!-- 1st Word Block Section -->
+        <div class="article-text-block">
+            <p>War is peace. Freedom is slavery. Ignorance is strength. In a world defined by surveillance, every corner, every light, and every shadow tells a story of systematic control. This layout reflects the stark contrast between human presence and institutional observation.</p>
+        </div>
+
+        <!-- 2nd Image Block Section -->
+        <div class="article-image-container">
+            <img src="lineofstreet.jpg" alt="Perspective lines down a street layout">
+            <p class="caption">Linear and uniform, just what Ingsoc intended.</p>
+        </div>
+
+        <!-- 2nd Word Block Section -->
+        <div class="article-text-block">
+            <p>Fall in line without a moment's hesitation. Don't even try to double think as the thought police shall vaporize your very existence.</p>
+        </div>
+
+        <!-- 3rd Image Block Section -->
+        <div class="article-image-container">
+            <img src="12.jpg" alt="Third photo representation">
+            <p class="caption">Free speech, an art forgotten through the test of time.</p>
+        </div>
+
+        <!-- 3rd Word Block Section -->
+        <div class="article-text-block">
+            <p> What sense is there to scream the truth if there are none left to hear it?</p>
+        </div>
+
+        <!-- 4th Image Block Section -->
+        <div class="article-image-container">
+            <img src="13.jpg" alt="Fourth photo representation">
+            <p class="caption">Is there a chance where i can go back?</p>
+        </div>
+
+        <!-- 4th Word Block Section -->
+        <div class="article-text-block">
+            <p>To be private is a sin to ministry. Keep walking, Winston.</p>
+        </div>
+
+        <!-- 5th Image Block Section -->
+        <div class="article-image-container">
+            <img src="1.jpg" alt="Fifth photo representation">
+            <p class="caption">Is it to illuminate?</p>
+        </div>
+
+        <!-- 5th Word Block Section -->
+        <div class="article-text-block">
+            <p>A light no longer serves the people but to expose that of which hides in the darkness. Look at me, Winston.</p>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Winston's Journal. All rights reserved.</p>
+        </footer>
+
+    </article>
+
+</body>
+</html>
